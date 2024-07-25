@@ -2,6 +2,7 @@
 
 import { http, createConfig } from 'wagmi'
 import { base, baseSepolia } from 'wagmi/chains'
+import { coinbaseWallet } from "wagmi/connectors";
 import { ReactNode } from 'react';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; 
@@ -13,6 +14,16 @@ export const config = createConfig({
     [base.id]: http(),
     [baseSepolia.id]: http(),
   },
+  connectors: [
+    coinbaseWallet({
+      appName: "Session Key Workshop",
+      preference: "smartWalletOnly",
+    }),
+    coinbaseWallet({
+      appName: "Session Key Workshop",
+      preference: "eoaOnly",
+    }),
+  ],
 })
 
 const queryClient = new QueryClient(); 

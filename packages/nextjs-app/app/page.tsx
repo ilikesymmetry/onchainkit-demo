@@ -1,15 +1,11 @@
 "use client";
 
-import { Connect } from "@/components/Connect";
-import { TransactionTesting } from "@/components/transaction-testing";
+import { Transactions } from "@/components/Transactions";
 
 export default function Home() {
   return (
-    <main className="">
-      <div className="absolute top-2 right-2">
-        <Connect />
-      </div>
-      <TransactionTesting />
+    <main className="flex min-h-screen w-full bg-muted/40">
+      <Transactions />
     </main>
   );
 }
