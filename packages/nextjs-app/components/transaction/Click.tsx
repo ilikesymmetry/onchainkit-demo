@@ -15,10 +15,12 @@ import {
     TransactionToastLabel, 
   } from '@coinbase/onchainkit/transaction'; 
 import { deployedContracts } from "@/lib/constants";
-import { zeroAddress } from "viem";
+import { Address, zeroAddress } from "viem";
+import { useAccount } from "wagmi";
 
 export function Click() {
     const {chainId} = useContext(AppContext)
+    const account = useAccount()
     const capabilities = useCapabilities()
     const contracts = clickContracts
 
@@ -27,7 +29,7 @@ export function Click() {
     return (
         <Transaction 
             chainId={chainId ?? 84532} // something breaks if we don't have default network?
-            address={!!chainId ? deployedContracts[chainId]?.click : zeroAddress} 
+            address={account.address as Address} 
             contracts={contracts} 
             capabilities={capabilities} 
         >
