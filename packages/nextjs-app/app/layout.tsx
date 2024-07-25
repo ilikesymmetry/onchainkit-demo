@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import OnchainProviders from "@/components/OnchainProviders";
+import '@coinbase/onchainkit/styles.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <OnchainProviders>
+          {children}
+        </OnchainProviders>
+      </body>
     </html>
   );
 }
