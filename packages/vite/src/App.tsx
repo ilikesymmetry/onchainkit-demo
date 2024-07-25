@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Connect } from './components/Connect'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,6 +10,9 @@ function App() {
   return (
     <>
       <div>
+        <div className='absolute top-0 right-0'>
+          <Connect />
+        </div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
