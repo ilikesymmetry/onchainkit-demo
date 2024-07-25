@@ -4,12 +4,14 @@ import { useContext } from "react"
 import { AppContext } from "../AppProvider"
 
 export function PaymasterUrl() {
-    const {paymasterUrl, setPaymasterUrl} = useContext(AppContext)
+    const {chainId, paymasterUrls, setPaymasterUrl} = useContext(AppContext)
+
+    console.log('paymasterUrls', paymasterUrls);
 
     return (
         <div className="grid gap-2">
-            <Label htmlFor="paymaster-url">Paymaster URL</Label>
-            <Input id="paymaster-url" placeholder="Enter Paymaster URL" value={paymasterUrl} onChange={(e) => setPaymasterUrl?.(e.target.value)}/>
+            <Label htmlFor="paymaster-url">Paymaster URL (chain-specific)</Label>
+            <Input id="paymaster-url" disabled={!chainId} placeholder="Enter Paymaster URL" value={!chainId ? "" : paymasterUrls?.[chainId] ?? ""} onChange={(e) => setPaymasterUrl?.(chainId!, e.target.value)}/>
         </div>
     )
 }

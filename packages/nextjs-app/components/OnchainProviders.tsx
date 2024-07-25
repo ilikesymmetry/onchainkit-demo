@@ -16,11 +16,11 @@ export const config = createConfig({
   },
   connectors: [
     coinbaseWallet({
-      appName: "Session Key Workshop",
+      appName: "OnchainKit QA",
       preference: "smartWalletOnly",
     }),
     coinbaseWallet({
-      appName: "Session Key Workshop",
+      appName: "OnchainKit QA",
       preference: "eoaOnly",
     }),
   ],
