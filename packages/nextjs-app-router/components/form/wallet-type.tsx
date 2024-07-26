@@ -3,6 +3,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useContext } from "react"
 import { useAccount, useConnect, useConnectors, useDisconnect } from "wagmi"
 import { AppContext } from "../AppProvider"
+import { getSlicedAddress } from "@/lib/utils"
 
 export enum WalletPreference {
     SMART_WALLET="smartWalletOnly",
@@ -10,7 +11,7 @@ export enum WalletPreference {
 }
 
 export function WalletType() { 
-    const {walletType, setWalletType} = useContext(AppContext)
+    const {walletType, setWalletType, clearWalletType} = useContext(AppContext)
     const { connect } = useConnect()
     const { disconnectAsync } = useDisconnect()
     const connectors = useConnectors()
@@ -26,10 +27,11 @@ export function WalletType() {
         }
         connect({connector})
     }
-
+ 
     async function disconnectAll() {
         await disconnectAsync({connector: connectors[0]})
         await disconnectAsync({connector: connectors[1]})
+        clearWalletType?.()
     }
 
     return (
@@ -57,7 +59,7 @@ export function WalletType() {
             <div className="text-xs text-neutral-500">{!account?.address ? (
                 "Click a type to connect"
             ) : (
-                `Connected: ${account?.address}`  
+                `Connected: ${getSlicedAddress(account.address)}`  
             )}</div>
         </div>
     )

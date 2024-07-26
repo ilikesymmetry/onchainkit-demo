@@ -10,6 +10,7 @@ type Paymaster = {
 type State = {
     walletType?: WalletPreference
     setWalletType?: (walletType: WalletPreference) => void
+    clearWalletType?: () => void
     chainId?: number,
     setChainId?: (chainId: number) => void
     paymasters?: Record<number, Paymaster> // paymasters is per network
@@ -54,6 +55,11 @@ export const AppProvider = ({ children }: {children: React.ReactNode}) => {
   function setWalletType(newWalletType: WalletPreference) {
     localStorage.setItem('walletType', newWalletType.toString());
     setWalletTypeState(newWalletType);
+    }
+    
+  function clearWalletType() {
+    localStorage.setItem('walletType', "");
+    setWalletTypeState(undefined);
   }
 
   const setChainId = (newChainId: number) => {
@@ -71,7 +77,7 @@ export const AppProvider = ({ children }: {children: React.ReactNode}) => {
   };
 
   return (
-    <AppContext.Provider value={{ walletType, setWalletType, chainId, setChainId, paymasters, setPaymaster }}>
+    <AppContext.Provider value={{ walletType, setWalletType, clearWalletType, chainId, setChainId, paymasters, setPaymaster }}>
       {children}
     </AppContext.Provider>
   );
