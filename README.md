@@ -18,22 +18,26 @@ Navigate to NextJS (app router) demo app
 cd packages/nextjs-app
 ```
 
-Update location of your `"pnpm"."overrides"."@coinbase/onchainkit"` if necessary in `package.json`.
-This works out of the box if you place the `onchainkit` repo right next to this one!
+(Optional) Update location of your `"pnpm"."overrides"."@coinbase/onchainkit"` if necessary in `package.json`.
+If you place the `onchainkit` repo right next to this one, you can skip this step and use the default.
 
-Intall dependencies (must use `pnpm` for local overrides)
+Intall dependencies and run app (must use `pnpm` for local overrides)
 
 ```bash
-pnpm install
+pnpm install && pnpm run dev
 ```
 
-Whenever you make a change to your local version of OnchainKit, first rebuild within that terminal tab.
+## Local development
+
+Whenever you make a change to your local version of OnchainKit, we need to rebuild the package.
+
+Rebuild within a separate terminal tab on the `onchainkit` repo.
 
 ```bash
 yarn build
 ```
 
-Then navigate back to your tab with `onchainkit-demo/packages/nextjs-app` and reload
+In a separate terminal tab within `onchainkit-demo/packages/nextjs-app`, cancel your running app and reload.
 
 ```bash
 pnpm run reload
