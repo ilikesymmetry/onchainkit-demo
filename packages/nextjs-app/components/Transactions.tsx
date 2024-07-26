@@ -1,7 +1,6 @@
 "use client";
 
 import { AppProvider } from "@/components/AppProvider";
-import { Connect } from "@/components/Connect";
 import { Chain } from "@/components/form/chain";
 import { PaymasterUrl } from "@/components/form/paymaster";
 import { WalletType } from "@/components/form/wallet-type";
@@ -10,9 +9,6 @@ import { Click } from "@/components/transaction/Click";
 export function Transactions() {
     return (
         <AppProvider>
-            <div className="absolute top-2 right-2">
-                <Connect />
-            </div>
             <div className="hidden min-w-120 w-1/4 flex-col border-r bg-background p-6 sm:flex">
                 <div className="mb-12 text-lg font-semibold">Settings</div>
                 <form className="grid gap-8">

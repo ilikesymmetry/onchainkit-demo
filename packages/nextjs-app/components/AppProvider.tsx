@@ -2,19 +2,24 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { WalletPreference } from './form/wallet-type';
 
+
+type Paymaster = {
+  url: string, 
+  enabled: boolean
+}
 type State = {
     walletType?: WalletPreference
     setWalletType?: (walletType: WalletPreference) => void
     chainId?: number,
     setChainId?: (chainId: number) => void
-    paymasterUrls?: Record<number, string> // paymasterUrls is per network
-    setPaymasterUrl?: (chainId: number, paymasterUrl: string) => void
+    paymasters?: Record<number, Paymaster> // paymasters is per network
+    setPaymaster?: (chainId: number, url: string, enabled: boolean) => void
 }
 
 const defaultState: State = {
     walletType: WalletPreference.SMART_WALLET,
     chainId: 85432,
-    paymasterUrls: {}
+    paymasters: {}
 }
 
 export const AppContext = createContext(defaultState);
@@ -22,17 +27,17 @@ export const AppContext = createContext(defaultState);
 export const AppProvider = ({ children }: {children: React.ReactNode}) => {
   const [walletType, setWalletTypeState] = useState<WalletPreference>();
   const [chainId, setChainIdState] = useState<number>();
-  const [paymasterUrls, setPaymasterUrlsState] = useState<Record<number,string>>();
+  const [paymasters, setPaymastersState] = useState<Record<number,Paymaster>>();
 
   // Load initial values from localStorage
   useEffect(() => {
     const storedWalletType = localStorage.getItem('walletType');
     const storedChainId = localStorage.getItem('chainId');
-    const storedPaymasterUrls = localStorage.getItem('paymasterUrls');
+    const storedPaymasters = localStorage.getItem('paymasters');
 
     console.log('storedWalletType', storedWalletType)
     console.log('storedChainId', storedChainId)
-    console.log('storedPaymasterUrls', storedPaymasterUrls)
+    console.log('storedPaymasters', storedPaymasters)
     
     if (storedWalletType) {
       setWalletType(storedWalletType as WalletPreference);
@@ -40,8 +45,8 @@ export const AppProvider = ({ children }: {children: React.ReactNode}) => {
     if (storedChainId) {
       setChainIdState(parseInt(storedChainId));
     }
-    if (storedPaymasterUrls) {
-      setPaymasterUrlsState(JSON.parse(storedPaymasterUrls));
+    if (storedPaymasters) {
+      setPaymastersState(JSON.parse(storedPaymasters));
     }
   }, []);
 
@@ -56,17 +61,17 @@ export const AppProvider = ({ children }: {children: React.ReactNode}) => {
     setChainIdState(newChainId);
   };
 
-  const setPaymasterUrl = (chainId: number, newPaymasterUrls: string) => {
+  const setPaymaster = (chainId: number, url: string, enabled: boolean) => {
     const newObj = {
-      ...paymasterUrls,
-      [chainId]: newPaymasterUrls
+      ...paymasters,
+      [chainId]: { url, enabled }
     }
-    localStorage.setItem('paymasterUrls', JSON.stringify(newObj));
-    setPaymasterUrlsState(newObj);
+    localStorage.setItem('paymasters', JSON.stringify(newObj));
+    setPaymastersState(newObj);
   };
 
   return (
-    <AppContext.Provider value={{ walletType, setWalletType, chainId, setChainId, paymasterUrls, setPaymasterUrl }}>
+    <AppContext.Provider value={{ walletType, setWalletType, chainId, setChainId, paymasters, setPaymaster }}>
       {children}
     </AppContext.Provider>
   );
