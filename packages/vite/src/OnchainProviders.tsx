@@ -20,7 +20,7 @@ function OnchainProviders({ children }: { children: ReactNode }) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <OnchainKitProvider
-          apiKey={"fsDbwDOLzfzHE6dxxdphhGPIjoSCxtt2"} // issue with process.env
+          apiKey={process.env.NEXT_PUBLIC_OCK_API_KEY}
           chain={base}
           schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
         >
