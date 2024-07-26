@@ -14,8 +14,7 @@ import {
     TransactionToastIcon,
     TransactionToastLabel, 
   } from '@coinbase/onchainkit/transaction'; 
-import { deployedContracts } from "@/lib/constants";
-import { Address, zeroAddress } from "viem";
+import { Address } from "viem";
 import { useAccount } from "wagmi";
 
 export function Click() {
