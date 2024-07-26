@@ -58,16 +58,24 @@ function SwapComponent() {
  
   return (
     <div className='relative w-full h-full'>
-      {chainId !== 8453 && (
+      {!address ? (
         <div className='w-full h-full flex flex-col justify-center text-center bg-[#000000] bg-opacity-50 z-10 absolute top-0 left-0 rounded-xl'>
-          <div className='bg-muted w-fit mx-auto p-6 rounded-md'>
-            Swap Demo is only available on Base.
+          <div className='bg-muted w-2/3 mx-auto p-6 rounded-md text-sm'>
+            Swap Demo requires wallet.
             <br />
-            Please change your chain.
+            Please connect in settings.
           </div>
         </div>
-      )}
-      <Swap address={address} className="border bg-[#ffffff]">
+      ) : chainId !== 8453 ? (
+        <div className='w-full h-full flex flex-col justify-center text-center bg-[#000000] bg-opacity-50 z-10 absolute top-0 left-0 rounded-xl'>
+          <div className='bg-muted w-2/3 mx-auto p-6 rounded-md text-sm'>
+            Swap Demo is only available on Base.
+            <br />
+            Please change your chain in settings.
+          </div>
+        </div>
+      ) : (<></>)}
+      <Swap address={address!} className="border bg-[#ffffff]">
         <SwapAmountInput
           label="Sell"
           swappableTokens={swappableTokens} 
