@@ -30,7 +30,7 @@ const queryClient = new QueryClient();
  
 function OnchainProviders({ children }: { children: ReactNode }) {
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={config} reconnectOnMount={false}>
       <QueryClientProvider client={queryClient}>
         <OnchainKitProvider
           apiKey={process.env.NEXT_PUBLIC_OCK_API_KEY}
