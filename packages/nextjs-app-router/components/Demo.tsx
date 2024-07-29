@@ -25,6 +25,7 @@ function Demo() {
                     <Chain />
                     <PaymasterUrl />
                 </form>
+                <a target="_blank" className="hover:underline text-sm absolute bottom-6 left-6" href="https://github.com/ilikesymmetry/onchainkit-demo">View Github</a>
             </div>
             <div className="flex flex-1 flex-col">
                 <div className="flex flex-col justify-center w-full h-full">
